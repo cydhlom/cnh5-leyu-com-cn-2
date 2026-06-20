@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雷速 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+      background: #f6f2ed;
+      color: #2c2b29;
+      line-height: 1.7;
+      padding: 2.4rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1000px;
+      width: 100%;
+      background: #fcf9f6;
+      padding: 2.8rem 2.4rem;
+      border-radius: 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 510;
+      letter-spacing: -0.01em;
+      color: #3f3c39;
+      margin-bottom: 0.5rem;
+      border-left: 4px solid #b7a99a;
+      padding-left: 1rem;
+    }
+
+    .subhead {
+      font-size: 1rem;
+      color: #6f6a63;
+      margin-bottom: 2.4rem;
+      padding-left: 1.2rem;
+      border-left: 1px solid #ddd6ce;
+    }
+
+    .hero-note {
+      background: #ece7e0;
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2.4rem;
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: #3f3b36;
+      border-left: 6px solid #c3b5a6;
+    }
+
+    .hero-note strong {
+      color: #4d443b;
+    }
+
+    .grid-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.2rem;
+    }
+
+    @media (max-width: 680px) {
+      .page { padding: 1.8rem 1.2rem; }
+      .grid-duo { grid-template-columns: 1fr; gap: 1.2rem; }
+      h1 { font-size: 1.6rem; }
+    }
+
+    .section-card {
+      background: #ffffffda;
+      backdrop-filter: blur(2px);
+      border-radius: 18px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      border: 1px solid #e9e2da;
+    }
+
+    .section-card h2 {
+      font-size: 1.2rem;
+      font-weight: 540;
+      color: #4e453c;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px dashed #d6cec4;
+    }
+
+    .section-card p, .section-card li {
+      font-size: 0.95rem;
+      color: #3f3b36;
+    }
+
+    .section-card ul {
+      list-style: none;
+      padding-left: 0.2rem;
+    }
+
+    .section-card li {
+      padding: 0.25rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .section-card li::before {
+      content: "·";
+      position: absolute;
+      left: 0.1rem;
+      color: #b09f8e;
+      font-weight: 700;
+    }
+
+    .info-block {
+      background: #f3efe9;
+      border-radius: 18px;
+      padding: 1.6rem 1.8rem;
+      margin: 2rem 0 1.8rem 0;
+      border: 1px solid #e4dbd1;
+    }
+
+    .info-block h3 {
+      font-size: 1.1rem;
+      font-weight: 520;
+      margin-bottom: 0.6rem;
+      color: #4f463d;
+    }
+
+    .info-block p {
+      font-size: 0.96rem;
+      color: #3f3a34;
+    }
+
+    .tip-box {
+      background: #e8e0d6;
+      border-radius: 14px;
+      padding: 1.2rem 1.6rem;
+      margin: 0.8rem 0 0 0;
+      border-left: 6px solid #bead9b;
+      font-size: 0.93rem;
+      color: #35312c;
+    }
+
+    .tip-box span {
+      font-weight: 560;
+      color: #4b4138;
+    }
+
+    .faq-mini {
+      margin: 1.8rem 0 1.4rem 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e4dbd1;
+      padding: 0.7rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 530;
+      color: #4d443b;
+      font-size: 0.96rem;
+    }
+
+    .faq-a {
+      font-size: 0.91rem;
+      color: #5b544c;
+      margin-top: 0.2rem;
+      padding-left: 1rem;
+    }
+
+    .inline-link {
+      color: #7c6b5a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px dotted #c8bcaa;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .inline-link:hover {
+      color: #4d3f32;
+      border-bottom-color: #7c6b5a;
+    }
+
+    .footer-meta {
+      margin-top: 2.8rem;
+      font-size: 0.82rem;
+      color: #8f867b;
+      text-align: right;
+      border-top: 1px solid #e7dfd7;
+      padding-top: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <h1>雷速 · 知识库入口</h1>
+  <div class="subhead">再次访问 · 收藏 · 持续关注</div>
+
+  <div class="hero-note">
+    <strong>📌 回到这里</strong> —— 如果你曾经浏览过 <a href="https://m--leisu.com" class="inline-link">雷速</a> 的内容，会发现信息结构在持续调整。本页作为固定入口，提供导航线索与使用备忘，方便你快速恢复上下文，减少重复查找。
+  </div>
+
+  <div class="grid-duo">
+    <div class="section-card">
+      <h2>📂 目录感布局</h2>
+      <ul>
+        <li>资源集散 · 按领域聚合条目</li>
+        <li>索引卡片式 · 标题+摘要+锚点</li>
+        <li>层级清晰 · 避免过度嵌套</li>
+        <li>快速定位 · 目录即导航</li>
+      </ul>
+    </div>
+    <div class="section-card">
+      <h2>📎 说明区</h2>
+      <ul>
+        <li>每篇笔记包含来源与更新日期</li>
+        <li>外部引用均附短注或原文链接</li>
+        <li>术语首次出现时给出简明定义</li>
+        <li>内容采用 CC BY-NC 4.0 授权</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>📋 相关信息区</h3>
+    <p>当前知识库主要覆盖：信息架构笔记、轻量级工具链、写作工作流、以及面向个人知识管理的实践记录。每季度会合并一次更新日志，归档旧版本。如果你在寻找特定主题，可以先翻阅分类索引，或使用站内搜索（如有）。</p>
+    <p style="margin-top: 0.8rem;">部分内容来自长期维护的公开文档，与 <a href="https://m--leisu.com" class="inline-link">雷速</a> 主站同步，但本页作为独立入口，更强调结构预览和再次访问的便捷性。</p>
+  </div>
+
+  <div class="tip-box">
+    <span>💡 提示：</span> 建议将本页添加至浏览器收藏夹或阅读列表。如果你习惯使用本地笔记工具，也可以直接保存页面快照 —— 文字内容均为纯文本结构，方便离线检索。知识库会不定期补充新条目，旧条目的修订记录保留在版本备注中。
+  </div>
+
+  <div class="faq-mini">
+    <div class="faq-item">
+      <div class="faq-q">❓ 如何快速找到之前读过的某篇文章？</div>
+      <div class="faq-a">目录卡片按主题分组，标题包含关键词。如果记得大概时间，可以结合更新日志缩小范围。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ 站内是否有全文搜索？</div>
+      <div class="faq-a">当前版本未部署搜索功能，建议使用浏览器「页面内查找」(Ctrl+F / Cmd+F) 定位关键词。后续可能加入轻量索引。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">❓ 内容会一直保留吗？</div>
+      <div class="faq-a">主要条目会长期保留，但部分临时性笔记可能在归档后移除。重要内容均有本地备份建议。</div>
+    </div>
+  </div>
+
+  <div style="margin: 1.4rem 0 0.6rem 0;">
+    <p style="font-size: 0.92rem; color: #5f5850;">如果你尚未浏览过主站，可以从 <a href="https://m--leisu.com" class="inline-link">雷速</a> 的起始页开始。本入口页面专为回头访问与持续关注者设计，结构与主站互补。</p>
+  </div>
+
+  <div class="footer-meta">
+    <span>入口页 · 目录感布局 · 版本 2409</span>
+  </div>
+
+</div>
+</body>
+</html>
