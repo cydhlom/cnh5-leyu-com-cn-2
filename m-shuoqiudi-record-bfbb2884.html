@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>说球帝 · 知识库与信息导览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f2f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        /* ===== 页面头部 ===== */
+        .page-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #dce2e8;
+        }
+
+        .site-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #1e293b;
+        }
+
+        .site-title small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-left: 0.75rem;
+        }
+
+        .subhead {
+            margin-top: 0.5rem;
+            color: #475569;
+            font-size: 1rem;
+            max-width: 650px;
+        }
+
+        /* ===== 卡片系统 ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 960px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e6edf3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            padding: 1.8rem 1.5rem 1.6rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #1e293b;
+        }
+
+        .card p, .card ul {
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .card ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .tag {
+            background: #f1f5f9;
+            color: #334155;
+            padding: 0.2rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* ===== 特殊宽卡片 ===== */
+        .feature-card {
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e6edf3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            padding: 2rem 2rem 1.8rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .feature-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #334155;
+            max-width: 780px;
+        }
+
+        .feature-card .link-wrap {
+            margin-top: 1.2rem;
+        }
+
+        .link-wrap a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #94a3b8;
+        }
+
+        .link-wrap a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* 提示区、FAQ 摘要 */
+        .info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            flex: 1 1 200px;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-box h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        /* ===== FAQ 折叠摘要 ===== */
+        .faq-summary {
+            margin-top: 1.2rem;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e9edf2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-a {
+            color: #475569;
+            font-size: 0.9rem;
+            padding-left: 0.8rem;
+            border-left: 2px solid #d1d9e0;
+        }
+
+        /* ===== 页脚 ===== */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #dce2e8;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #475569;
+            text-decoration: none;
+            border-bottom: 1px dotted #cbd5e1;
+        }
+
+        .footer a:hover {
+            color: #1e293b;
+            border-bottom-style: solid;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem 1rem;
+            }
+            .site-title {
+                font-size: 1.7rem;
+            }
+            .card {
+                padding: 1.4rem 1.2rem;
+            }
+            .feature-card {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <h1 class="site-title">说球帝 <small>知识库 · 信息索引</small></h1>
+        <p class="subhead">关于体育资讯、赛事数据与内容聚合的轻量导览页。这里整理了一些使用场景与常见疑问，方便你快速了解主要方向。</p>
+    </header>
+
+    <!-- 卡片网格：目录感布局 -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">🏀</div>
+            <h3>赛事动态</h3>
+            <p>覆盖主流联赛与热门对抗，实时比分、赛程预告及赛后简报。适合日常关注比赛进程的用户。</p>
+            <div class="tag-list">
+                <span class="tag">NBA</span>
+                <span class="tag">CBA</span>
+                <span class="tag">欧冠</span>
+                <span class="tag">五大联赛</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📊</div>
+            <h3>数据与统计</h3>
+            <p>球员、球队基础数据，积分榜、射手榜等结构化信息。辅助分析，也适合数据爱好者查阅。</p>
+            <ul>
+                <li>场均得分 / 篮板 / 助攻</li>
+                <li>历史交锋记录</li>
+                <li>赛季走势图</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🧭</div>
+            <h3>内容聚合</h3>
+            <p>赛事文章、短视频、专题策划。多角度呈现体育故事与讨论热点，满足不同阅读习惯。</p>
+            <div class="tag-list">
+                <span class="tag">战报</span>
+                <span class="tag">集锦</span>
+                <span class="tag">人物</span>
+                <span class="tag">深度</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 介绍与可信说明区（宽卡片） -->
+    <div class="feature-card">
+        <h2>站点介绍 · 可信说明</h2>
+        <p>
+            <a href="https://m--shuoqiudi.com">说球帝</a> 是一个以体育内容为核心的资讯平台，提供赛事数据、新闻动态及社区讨论内容。
+            平台聚合多方信息源，经整理后以结构化方式呈现，帮助用户更高效地跟进自己关注的体育项目。
+            所有公开数据均来自合规渠道，内容运营团队持续校对，力求信息准确、更新及时。
+        </p>
+        <p style="margin-top: 0.8rem;">
+            需要说明的是，平台本身并不直接参与赛事直播或博彩业务，仅作为体育信息聚合与讨论的入口。
+            用户在使用过程中遇到任何数据疑问，可参考站内帮助文档或联系客服进一步确认。
+        </p>
+        <div class="link-wrap">
+            <span>→ 直接前往 <a href="https://m--shuoqiudi.com">说球帝</a> 查看最新内容。</span>
+        </div>
+    </div>
+
+    <!-- 提示区 + 相关信息区 (左右并排) -->
+    <div class="info-row">
+        <div class="info-box">
+            <h4>📌 使用提示</h4>
+            <p>建议使用现代浏览器访问，部分功能依赖 JavaScript 支持。移动端可自适应排版，操作更顺手。</p>
+            <p style="margin-top: 0.5rem;">如遇页面加载缓慢，可尝试刷新或检查网络连接。数据更新存在一定延迟，请以官方公告为准。</p>
+        </div>
+        <div class="info-box">
+            <h4>📎 相关信息</h4>
+            <p>平台内容涵盖足球、篮球、网球、电竞等多个品类。你可以通过站内搜索快速定位特定赛事或球员。</p>
+            <p style="margin-top: 0.5rem;">社区板块支持用户发帖、评论与分享，参与讨论前请阅读社区规范。</p>
+        </div>
+        <div class="info-box">
+            <h4>🔍 常见场景</h4>
+            <p>· 赛前查看双方近期状态与伤病名单<br>
+               · 赛后回顾关键数据与高光时刻<br>
+               · 浏览深度长文了解战术演变</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要区（精简） -->
+    <div class="feature-card" style="margin-top: 1rem;">
+        <h2>FAQ 摘要</h2>
+        <div class="faq-summary">
+            <div class="faq-item">
+                <div class="faq-q">问：数据来源可靠吗？</div>
+                <div class="faq-a">平台数据主要来自官方统计机构及授权数据供应商，同时结合人工校对，常规赛事准确率有保障。极个别非主流联赛可能存在延迟，请理解。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">问：是否需要注册才能使用？</div>
+                <div class="faq-a">浏览大部分公开内容无需注册。评论、收藏、个性化订阅等功能需要登录账号，注册流程简单且免费。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">问：内容是否支持分享？</div>
+                <div class="faq-a">站内多数页面均提供分享入口，支持复制链接、转发至社交平台。部分视频内容因版权原因可能限制外站播放。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>本页为信息导览页，内容由<strong>说球帝</strong>相关公开资料整理而成 · 
+           <a href="https://m--shuoqiudi.com">说球帝</a> · 
+           <span style="color:#94a3b8;">仅供参考</span></p>
+        <p style="margin-top:0.3rem; font-size:0.8rem; color:#94a3b8;">创作种子 1585ed0c08a949fe（内部标识，不展示）</p>
+    </footer>
+
+</div>
+</body>
+</html>
